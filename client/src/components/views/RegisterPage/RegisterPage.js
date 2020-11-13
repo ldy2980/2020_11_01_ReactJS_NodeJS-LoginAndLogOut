@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { registerUser } from '../../../_actions/user_action';
-
+import Axios from 'axios';
+import { withRouter } from 'react-router-dom';
 function RegisterPage(props) {
   const dispatch = useDispatch();
 
   const [Email, setEmail] = useState('');
-  const [Password, setPassword] = useState('');
   const [Name, setName] = useState('');
+  const [Password, setPassword] = useState('');
   const [ConfirmPassword, setConfirmPassword] = useState('');
 
   const onEmailHandler = (event) => {
@@ -38,7 +39,6 @@ function RegisterPage(props) {
       password: Password,
       name: Name
     };
-
     dispatch(registerUser(body)).then((response) => {
       if (response.payload.success) {
         props.history.push('/login');
@@ -70,11 +70,12 @@ function RegisterPage(props) {
 
         <label>Confirm Password</label>
         <input type="password" value={ConfirmPassword} onChange={onConfirmPasswordHandler} />
+
         <br />
-        <button>회원 가입</button>
+        <button type="submit">회원 가입</button>
       </form>
     </div>
   );
 }
 
-export default RegisterPage;
+export default withRouter(RegisterPage);

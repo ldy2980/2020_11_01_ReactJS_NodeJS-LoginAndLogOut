@@ -26,6 +26,8 @@ mongoose
 
 app.get('/', (req, res) => res.send('Hello World!!!!'));
 
+app.get('/api/hello', (req, res) => res.send('Hello World!~~ '));
+
 app.post('/api/users/register', (req, res) => {
   const user = new User(req.body);
 
@@ -63,7 +65,7 @@ app.post('/api/users/login', (req, res) => {
   });
 });
 
-app.get('api/users/auth', auth, (req, res) => {
+app.get('/api/users/auth', auth, (req, res) => {
   res.status(200).json({
     _id: req.user._id,
     isAdmin: req.user.role === 0 ? false : true,
